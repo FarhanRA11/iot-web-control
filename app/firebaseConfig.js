@@ -6,13 +6,13 @@ import { getDatabase } from "firebase/database";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBSWPUheHjFz7U1iE-Thbo6ki_jfgOhlS0",
-  authDomain: "iot-project-5761a.firebaseapp.com",
-  databaseURL: "https://iot-project-5761a-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "iot-project-5761a",
-  storageBucket: "iot-project-5761a.firebasestorage.app",
-  messagingSenderId: "943124515933",
-  appId: "1:943124515933:web:be2a4dd32e23b4dcdf51b4"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_APIKEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTHDOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASEURL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECTID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APPID
 };
 
 // Initialize Firebase
