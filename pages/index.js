@@ -1,8 +1,8 @@
 import { get, set, ref, child } from 'firebase/database';
 import { useEffect, useState } from 'react';
-import { database } from './firebaseConfig';
+import { database } from '../firebase/firebaseConfig.js';
 
-export default function App() {
+export default function Home() {
   const [value, setValue] = useState(0); // Default nilai aman (0)
   const [isLoading, setIsLoading] = useState(true); // Untuk memastikan data awal selesai di-load
 
@@ -12,7 +12,7 @@ export default function App() {
       try {
         const snapshot = await get(child(ref(database), 'LED/'));
         if (snapshot.exists()) {
-          setValue(snapshot.val().analog * 100/255 || 0); // Gunakan 0 jika `analog` undefined
+          setValue(Number((snapshot.val().analog * 100/255).toFixed(0)) || 0); // Gunakan 0 jika `analog` undefined
         } else {
           console.log('No data available, using default value');
           setValue(0); // Nilai default jika tidak ada data
