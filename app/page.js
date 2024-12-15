@@ -14,7 +14,7 @@ export default function App() {
       try {
         const snapshot = await get(child(ref(database), 'LED/'));
         if (snapshot.exists()) {
-          setValue(snapshot.val().analog || 0); // Gunakan 0 jika `analog` undefined
+          setValue(snapshot.val().analog * 100/255 || 0); // Gunakan 0 jika `analog` undefined
         } else {
           console.log('No data available, using default value');
           setValue(0); // Nilai default jika tidak ada data
@@ -34,7 +34,7 @@ export default function App() {
     if (!isLoading) {
       const updateValue = async () => {
         try {
-          await set(ref(database, 'LED/'), { analog: value });
+          await set(ref(database, 'LED/'), { analog: Number((value * 255/100).toFixed(0)) });
         } catch (error) {
           console.error('Error updating data:', error);
         }
@@ -46,7 +46,7 @@ export default function App() {
   // Render component hanya jika data telah diambil
   return (
     <div className='flex flex-col items-center m-10'>
-      <p>kecerahan LED</p>
+      <p className='text-xl'>kecerahan LED</p>
       {!isLoading ? (
         <>
           <input
@@ -54,10 +54,10 @@ export default function App() {
             type="range"
             value={value}
             min={0}
-            max={255}
+            max={100}
             className='center w-full h-10 rounded-md border border-gray-400'
           />
-          <p>{((value * 100) / 255).toPrecision(3)}%</p>
+          <p className='text-xl'>{value}%</p>
         </>
       ) : (
         <p>Loading...</p>
