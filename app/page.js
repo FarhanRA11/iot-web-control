@@ -1,5 +1,3 @@
-'use client';
-
 import { get, set, ref, child } from 'firebase/database';
 import { useEffect, useState } from 'react';
 import { database } from './firebaseConfig';
